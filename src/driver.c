@@ -6,11 +6,11 @@
 #include "board_high/include/board_high.h"
 
 cute_driver_result init_driver() {
-    return init_board();
+    return init_board_high();
 }
 
 void destroy_driver(cute_driver_result* self) {
-    destroy_board(self);
+    destroy_board_high(self);
 }
 
 

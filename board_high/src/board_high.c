@@ -5,6 +5,12 @@
 #include "board_high/cute_operate/include/cute_operate.h"
 #include "board_high/include/board_high.h"
 
+cute_driver_result init_board_high() {
+    return cute_empty_ok();
+}
+void destroy_board_high(cute_driver_result* self) {
+}
+
 
 typedef struct {
     i32 count;
@@ -62,6 +68,8 @@ void destroy_echo_task(cute_driver_result* self) {
         return;
     }
 }
+
+
 
 char* get_board_high_name() {
     return get_operation_name();
