@@ -1,5 +1,6 @@
 if(WIN32)
-    message(FATAL_ERROR "this system arch is window. do not use")
+    add_compile_definitions(WIN)
+    message(STATUS "this system arch is window.")
 elseif (APPLE)
     add_compile_definitions(DAW)
     message(STATUS "this system arch is mac.")

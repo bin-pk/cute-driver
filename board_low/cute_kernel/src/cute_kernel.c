@@ -3,8 +3,10 @@
 //
 #ifdef DAW
 #include "board_low/cute_kernel/src/mac/mac_kernel.c"
-#elif POX
-#ifdef TK
+#elif WIN
+#include "board_low/cute_kernel/src/win/win_kernel.c"
+#elif fPOX
+#ifdef
 #include "board_low/cute_kernel/src/test/test_kernel.c"
 #endif
 #endif
