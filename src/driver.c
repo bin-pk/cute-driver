@@ -39,5 +39,5 @@ void destroy_driver_task(u32 protocol,cute_driver_result* self) {
 }
 
 u32 get_driver_version() {
-    return 0;
+    return LAST_VERSION;
 }

@@ -66,3 +66,14 @@ endif ()
 
 target_link_libraries(${TARGET_NAME}_shared PRIVATE common board_low board_high)
 target_link_libraries(${TARGET_NAME}_static PRIVATE common board_low board_high)
+
+include(CTEST)
+file(GLOB_RECURSE TEST_FILES ${CMAKE_CURRENT_SOURCE_DIR}/test/*.c)
+foreach (TEST_FILE ${TEST_FILES})
+    get_filename_component(TEST_NM ${TEST_FILE} NAME_WE) #without extension : 확장자 없음.
+    message(${TEST_NM})
+    add_executable(${TEST_NM} ${TEST_FILE}) # 실행 연결
+    target_link_libraries(${TEST_NM} PRIVATE ${TARGET_NAME}_static) # 연결 및 include 하기
+    target_include_directories(${TEST_NM} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
+    target_include_directories(${TEST_NM} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+endforeach ()
