@@ -10,6 +10,7 @@ cute_driver_result cute_empty_ok() {
     res.code = CUTE_EMPTY;
     res.len = 0;
     res.result.heap_data = NULL;
+    res.destroy = NULL;
 
     return res;
 }

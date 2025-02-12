@@ -5,12 +5,25 @@
 #include "board_high/cute_operate/include/cute_operate.h"
 #include "board_high/include/board_high.h"
 
-cute_driver_result init_board_high() {
-    return cute_empty_ok();
-}
-void destroy_board_high(cute_driver_result* self) {
-}
+static void destroy_board_high(cute_driver_result* self) {
+    if (self != NULL) {
+        self->destroy = NULL;
+    }
+};
 
+static void destroy_echo_create_task(cute_driver_result* self) {
+
+};
+
+static void destroy_echo_execute_task(cute_driver_result* self) {
+
+};
+
+cute_driver_result init_board_high() {
+    cute_driver_result empty_result = cute_empty_ok();
+    empty_result.destroy = destroy_board_high;
+    return empty_result;
+}
 
 typedef struct {
     i32 count;
@@ -24,6 +37,7 @@ cute_driver_result create_echo_task(void *parameter) {
     ctx.count = 0;
 
     cute_driver_result res;
+    res.destroy = destroy_echo_create_task;
     res.code = CUTE_STACK_OK;
     res.len = sizeof(echo_context);
     memcpy(res.result.stack_data, &ctx,sizeof(echo_context));
@@ -56,6 +70,7 @@ cute_driver_result execute_echo_task(cute_driver_result* self) {
     cute_driver_result res;
     res.code = CUTE_STACK_OK;
     res.len = sizeof(echo_output);
+    res.destroy = destroy_echo_execute_task;
     memcpy(res.result.stack_data, &output, sizeof(echo_output));
     return res;
 }
@@ -63,11 +78,6 @@ cute_driver_result execute_echo_task(cute_driver_result* self) {
 /*
  * 동작 할당 요소가 없기에 해제하지 아니함.
  */
-void destroy_echo_task(cute_driver_result* self) {
-    if (self == NULL) {
-        return;
-    }
-}
 
 
 
